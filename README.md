@@ -4,7 +4,7 @@ This repository will be used to do automated tests with Robot Framework and Cypr
 
 # Robot Framework
 
-- Need to be installed where you want: **pip install robotframework**
+- Need to be installed where you want: `pip install robotframework`
 
 ### Setup environment
 
@@ -13,9 +13,9 @@ This repository will be used to do automated tests with Robot Framework and Cypr
 
 Terminal:
 
-- **python -m venv venv**
-- **source venv/bin/activate**
-- _To turn off the virtual enviroment use **deactivate** in terminal._
+- `python -m venv venv`
+- `source venv/bin/activate`
+- _To turn off the virtual enviroment use `deactivate` in terminal._
 
 VsCode:
 
@@ -26,9 +26,9 @@ With these steps, when you install a lib, pip uses the correct Python version se
 
 ### requirements.txt
 
-- **To install all dependencies use -> pip install -r requirements.txt**
-- Using pipreqs -> **pip3 install pipreqs**
-- _Create_ or update requirements.txt -> **pipreqs . --force**
+- **To install all dependencies use -> `pip install -r requirements.txt`**
+- Using pipreqs -> `pip3 install pipreqs`
+- _Create_ or update requirements.txt -> `pipreqs . --force`
   pipreqs lists just the libraries really used in the project where's called.
 
 # Cypress
@@ -36,5 +36,5 @@ With these steps, when you install a lib, pip uses the correct Python version se
 ### Setup environment
 
 1. Enter the appropriate repository;
-- To cooperate, download the dependencies: **npm install**;
-- Execute **npx cypress open** to execute visually the tests.
+- To cooperate, download the dependencies: `npm install`;
+- Execute `npx cypress open` to execute visually the tests.
