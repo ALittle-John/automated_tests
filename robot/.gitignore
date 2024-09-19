@@ -1,4 +1,6 @@
 # Packages
 /venv
-/results
+__pycache__
 
+# Reports
+/results
