@@ -20,7 +20,7 @@ Terminal:
 VsCode:
 
 - Added the python venv option in "Python: Select Interpreter";
-- Setup .vscode/settings.json to force use the vscode use the correct virtual environment;
+- setup.cfg was created to force vscode to use the correct venv to import lib.
 
 With these steps, when you install a lib, pip uses the correct Python version set up in venv.
 
