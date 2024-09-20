@@ -13,7 +13,7 @@ This repository will be used to do automated tests with Robot Framework and Cypr
 
 Terminal:
 
-- `python -m venv venv`
+- `python -m venv venv` -> This will also create pyvenv.cfg with the python alias and more.
 - `source venv/bin/activate`
 - _To turn off the virtual enviroment use `deactivate` in terminal._
 
