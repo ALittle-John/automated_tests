@@ -38,3 +38,7 @@ With these steps, when you install a lib, pip uses the correct Python version se
 1. Enter the appropriate repository;
 - To cooperate, download the dependencies: `npm install`;
 - Execute `npx cypress open` to execute visually the tests.
+
+### commands
+- `npm run cy:open` -> Open the UI;
+- `npm run cy:run` -> Runs tests in headless mode.
