@@ -2,19 +2,21 @@
 Library    SeleniumLibrary
 Library    OperatingSystem
 
-*** Variables ***
-${RESULTS}    robot/results
-
 *** Keywords ***
-Test
-  ${status}    Run Keyword And Return Status    Directory Should Exist    path=${RESULTS}
+Setup Browser
+  [Arguments]    ${url}
+
+  ${results}    Set Variable    robot/results
+
+  ${status}    Run Keyword And Return Status    Directory Should Exist    path=${results}
   IF    ${status} == False
-    Create Directory    path=${RESULTS}
-    Log To Console    Directory ${RESULTS} created
+    Create Directory    path=${results}
+    Log To Console    Directory ${results} created
   END
-  Set Screenshot Directory    path=${RESULTS}
-  Log To Console    Set up all failed screenshots will be saved in ${RESULTS}
+
+  Set Screenshot Directory    path=${results}
+  Log To Console    Set up all failed screenshots will be saved in ${results}
   Log To Console    Please, don't forget to delete the report file in the project root!
 
-  Open Browser     browser=chrome   url=https://robotframework.org/?tab=0#getting-started
+  Open Browser     browser=chrome   url=${url}
   Maximize Browser Window
