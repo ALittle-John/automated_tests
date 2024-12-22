@@ -1,5 +1,5 @@
 *** Settings ***
-Resource    ../../../resources/api_keywords/reqres_in_keywords/rest.resource
+Resource    ../../../resources/for_api_tests/reqres_in_keywords/rest.resource
 
 *** Test Cases ***
 Get Reqres Fake API
