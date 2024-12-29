@@ -1,5 +1,6 @@
 *** Settings ***
 Library    RequestsLibrary
+# Library    requests
 Library    OperatingSystem
 
 *** Variables ***
@@ -11,19 +12,18 @@ Reqres API Method Get
     [Documentation]    Options: `{resource}; users; users/{id}; {resource}/{id}`
     [Arguments]    ${final_url}
 
-    ${response}    Run Keyword And Ignore Error    GET    ${BASE_URL}${final_url}
-    ${status_req}    Set Variable     ${response[1]}
-    
-    IF    '${status_req}' != '<Response [200]>'
-        Run Keyword And Continue On Failure    Fail    Route with final "${final_url}" get status ${status_req}! Please verify.
-        ${response_body_string}    Set Variable    None
-    ELSE
-        ${response_body_string}    Convert To String    ${response[1].json()}
-        ${response_body_idented}    Evaluate    json.dumps(${response_body_string}, indent=2)
-        # Log To Console    ${response_body_idented}
-    END
+    ${url_request}    Set Variable    ${BASE_URL}${final_url}
 
-    # Log To Console    Response body: ${response_body_string}
-    RETURN    ${response_body_string}
+    Log    message=Request in ${url_request}    html=True    console=True
+
+    ${response}    Run Keyword And Ignore Error    GET    ${url_request}
+    ${has_status_code}    Run Keyword And Return Status    Log    ${response[1].status_code}
+    IF    ${has_status_code} == True
+        ${response_status}    Set Variable    ${response[1].status_code}
+        Log    Status code captured: ${response_status}    console=True
+    ELSE
+        ${response_status}    Set Variable    ${response[1]}
+        Log    Response beyond status 200 - 299. Returned: ${response_status}    level=ERROR
+    END
 
 ### PUT ###
