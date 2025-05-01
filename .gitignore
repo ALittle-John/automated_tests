@@ -1,5 +1,5 @@
 # Packages
-/venv
+robot/venv
 __pycache__
 
 # Reports
@@ -7,3 +7,4 @@ __pycache__
 
 # Mine
 notation.txt
+.vscode
