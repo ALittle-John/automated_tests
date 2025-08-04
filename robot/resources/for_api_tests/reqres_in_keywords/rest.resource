@@ -6,24 +6,44 @@ Library    OperatingSystem
 ${BASE_URL}    https://reqres.in/api/
 
 *** Keywords ***
+Create Authenticated Session Reqres
+    [Arguments]    ${alias}    ${base_url}    ${api_keys}
+
+    &{headers}    Create Dictionary    x-api-key=${api_keys}
+    Create Session    alias=${alias}    url=${base_url}    headers=${headers}    disable_warnings=1
+
 ### GET ###
 Reqres API Method Get
     [Documentation]    Options: `{resource}; users; users/{id}; {resource}/{id}`
     [Arguments]    ${final_url}
 
-    ${response}    Run Keyword And Ignore Error    GET    ${BASE_URL}${final_url}
-    ${status_req}    Set Variable     ${response[1]}
-    
-    IF    '${status_req}' != '<Response [200]>'
-        Run Keyword And Continue On Failure    Fail    Route with final "${final_url}" get status ${status_req}! Please verify.
-        ${response_body_string}    Set Variable    None
+    Log    message=Request in ${final_url}    html=True    console=True
+
+    Create Authenticated Session Reqres    alias=reqres    base_url=${BASE_URL}    api_keys=reqres-free-v1
+    ${response}    Run Keyword And Ignore Error    GET On Session    reqres    ${final_url}
+
+    ${has_status_code}    Run Keyword And Return Status    Log    ${response[1].status_code}
+    IF    ${has_status_code} == True
+        Log    message=Status code: ${response[1].status_code}    console=True
+        Log    message=Response text: ${response[1].text} ${\n}    console=True
     ELSE
-        ${response_body_string}    Convert To String    ${response[1].json()}
-        ${response_body_idented}    Evaluate    json.dumps(${response_body_string}, indent=2)
-        # Log To Console    ${response_body_idented}
+        Log    ${final_url} Returned: ${response[1]}${\n}    level=ERROR
     END
 
-    # Log To Console    Response body: ${response_body_string}
-    RETURN    ${response_body_string}
-
 ### PUT ###
+Reqres API Method Put
+    [Documentation]    Options: `users/{id}; {resource}/{id}`
+    ...
+    ...    ${data} -> Must be in JSON format. The necessary data is *"name": "XXX"* and *"job": "zion resident"*.
+    [Arguments]    ${final_url}    ${data}
+
+    Create Authenticated Session Reqres    alias=reqres    base_url=${BASE_URL}    api_keys=reqres-free-v1
+    ${response}    Run Keyword And Ignore Error    PUT On Session    alias=reqres    url=${final_url}    json=${data}
+
+    ${has_status_code}    Run Keyword And Return Status    Log    ${response[1].status_code}
+    IF    ${has_status_code} == True
+        Log    message=Status code: ${response[1].status_code}    console=True
+        Log    message=Response text: ${response[1].text} ${\n}    console=True
+    ELSE
+        Log    ${final_url} Returned: ${response[1]} ${\n}    level=ERROR
+    END
