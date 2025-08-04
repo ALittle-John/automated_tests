@@ -1,5 +1,5 @@
 *** Settings ***
-Resource    ../../../resources/for_api_tests/reqres_in_keywords/rest.resource
+Resource    ../../../resources/api/reqres/rest.resource
 
 *** Test Cases ***
 Get User To Update
