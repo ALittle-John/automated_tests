@@ -19,9 +19,9 @@ Reqres API
     Create Authenticated Session Reqres    alias=reqres    base_url=${BASE_URL}    api_keys=reqres-free-v1
 
     IF    '${method}' == 'GET'
-        ${response}    Run Keyword And Ignore Error    GET On Session    reqres    ${final_url}
+        ${_}    ${response}    Run Keyword And Ignore Error    GET On Session    reqres    ${final_url}
     ELSE IF    '${method}' == 'PUT'
-        ${response}    Run Keyword And Ignore Error    PUT On Session    alias=reqres    url=${final_url}    json=${data}
+        ${_}    ${response}    Run Keyword And Ignore Error    PUT On Session    alias=reqres    url=${final_url}    json=${data}
     # ELSE IF    '${method}' == 'POST'
 
     # ELSE IF    '${method}' == 'DELETE'
@@ -30,14 +30,14 @@ Reqres API
         Fatal Error    msg=A valid method need to be choosed: GET, PUT, POST, DELETE
     END
 
-    ${has_status_code}    Run Keyword And Return Status    Log    ${response[1].status_code}
+    ${has_status_code}    Run Keyword And Return Status    Log    ${response.status_code}
     IF    ${has_status_code} == True
-        Log    message=Status code: ${response[1].status_code} | Response text: ${response[1].text} ${\n}    console=True
+        Log    message=Status code: ${response.status_code} | Response text: ${response.text} ${\n}    console=True
 
-        RETURN    ${response[1].text}
+        RETURN    ${response.text}
     ELSE
-        Log    ${final_url} Returned text: ${response[1]} ${\n}    level=WARN
+        Log    ${final_url} Returned text: ${response} ${\n}    level=WARN
 
-        &{dict_text}    Create Dictionary    response_text=${response[1]}
+        &{dict_text}    Create Dictionary    response_text=${response}
         RETURN    ${dict_text}
     END
