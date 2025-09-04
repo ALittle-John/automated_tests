@@ -13,7 +13,7 @@ This repository will be used to do automated tests with Robot Framework and Cypr
 
 Terminal:
 
-- `python -m venv venv` -> This will also create pyvenv.cfg with the python alias and more.
+- `python -m venv --copies venv` -> TThe --copies option forces copying the Python binary instead of using symlink to pyenv.
 - `source venv/bin/activate`
 - _To turn off the virtual enviroment use `deactivate` in terminal._
 
@@ -36,9 +36,11 @@ With these steps, when you install a lib, pip uses the correct Python version se
 ### Setup environment
 
 1. Enter the appropriate repository;
+
 - To cooperate, download the dependencies: `npm install`;
 - Execute `npx cypress open` to execute visually the tests.
 
 ### commands
+
 - `npm run cy:open` -> Open the UI;
 - `npm run cy:run` -> Runs tests in headless mode.
