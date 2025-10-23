@@ -2,7 +2,7 @@
 Library    RequestsLibrary
 
 Resource    ../variables.resource
-Resource    ../connections/create_session.resource
+Resource    ../connections/api_connection_resource/create_session.resource
 
 *** Keywords ***
 Reqres API

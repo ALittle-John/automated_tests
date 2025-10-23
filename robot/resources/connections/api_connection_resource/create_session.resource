@@ -1,7 +1,7 @@
 *** Settings ***
 Library    RequestsLibrary
 
-Resource    ../variables.resource
+Resource    ../../variables.resource
 
 *** Keywords ***
 Create Authenticated Session
