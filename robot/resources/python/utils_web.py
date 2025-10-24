@@ -13,6 +13,7 @@ locator_map = {
 }
 
 class SetupBrowser:
+    # Possible non-use in robot resources
     def open_browser(self, browser_name: str):
         browser_name = browser_name.lower()
         if browser_name == "chrome":
@@ -34,6 +35,7 @@ class SetupBrowser:
         browser.get(url)
 
 class WebElementInteractions:
+    # Possible non-use of most functions in robot resources
     def prove_element_present(self, browser: webdriver, locator_type: str, locator_value: str):
         locator_type_upper = locator_type.upper()
         web_element = browser.find_element(locator_map[locator_type_upper], locator_value)
