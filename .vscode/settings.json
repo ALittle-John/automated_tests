@@ -8,6 +8,7 @@
     // === PYTHON / ROBOT ===
     "python.defaultInterpreterPath": "${workspaceFolder}/robot/venv/bin/python",
     "robot.language-server.python": "${workspaceFolder}/robot/venv/bin/python",
+    "python.envFile": "${workspaceFolder}/.env",
     "python.analysis.extraPaths": [
         "${workspaceFolder}/robot/venv/lib/python3.12/site-packages",
         "robot/resources",
