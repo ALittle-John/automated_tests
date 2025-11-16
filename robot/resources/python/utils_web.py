@@ -1,4 +1,8 @@
 from selenium import webdriver
+from selenium.webdriver import Keys, ActionChains
+from selenium.webdriver.common.by import By
+import time
+
 from selenium.webdriver.chrome.service import Service as ChromeService
 from webdriver_manager.chrome import ChromeDriverManager
 from selenium.webdriver.edge.service import Service as EdgeService
@@ -6,7 +10,11 @@ from webdriver_manager.microsoft import EdgeChromiumDriverManager
 from selenium.webdriver.firefox.service import Service as FirefoxService
 from webdriver_manager.firefox import GeckoDriverManager
 
-from selenium.webdriver.common.by import By
+try:
+    from python import _setup
+    browser = _setup.browser
+except ImportError:
+    browser = None
 
 locator_map = {
     "ID": By.ID,
@@ -21,44 +29,63 @@ locator_map = {
 
 class SetupBrowser:
     # Possible non-use in robot resources
-    @staticmethod
-    def open_browser(browser_name: str):
-        browser_name = browser_name.lower()
-        if browser_name == "chrome":
-            browser = webdriver.Chrome(service=ChromeService(ChromeDriverManager().install()))
-        elif browser_name == "firefox":
-            browser = webdriver.Firefox(service=FirefoxService(GeckoDriverManager().install()))
-        elif browser_name == "edge":
-            browser = webdriver.Edge(service=EdgeService(EdgeChromiumDriverManager().install()))
+    def __init__(self, browser_name: str):
+        self.browser_name = browser_name.lower()
+        self.browser = None
+        # "Self" loads the content into the rest of the class. When used before a variable, it can be accessed by other methods within the class.
+
+    def open_browser(self):
+        if self.browser is not None:
+            return self.browser
+
+        if self.browser_name == "chrome":
+            self.browser = webdriver.Chrome(service=ChromeService(ChromeDriverManager().install()))
+        elif self.browser_name == "firefox":
+            self.browser = webdriver.Firefox(service=FirefoxService(GeckoDriverManager().install()))
+        elif self.browser_name == "edge":
+            self.browser = webdriver.Edge(service=EdgeService(EdgeChromiumDriverManager().install()))
         else:
-            raise ValueError(f"Unsupported browser: {browser_name}")
-        browser.maximize_window()
+            raise ValueError(f"Unsupported browser: {self.browser_name}")
+        self.browser.maximize_window()
+        self.browser.implicitly_wait(0.5)
 
-        return browser
+        return self.browser
 
-    @staticmethod
-    def shut_down_browser(browser: webdriver):
-        browser.quit()
+    def shut_down_browser(self):
+        if self.browser is not None:
+            self.browser.quit()
+            self.browser = None
 
-    @staticmethod
-    def search_website(browser: webdriver, url: str):
-        browser.get(url)
+    def search_website(self, url: str):
+        self.browser.get(url)
 
 class WebElementInteractions:
     # Possible non-use of most functions in robot resources
-    @staticmethod
-    def prove_element_present(browser: webdriver, locator_type: str, locator_value: str):
+    def __init__(self, driver):
+        self.browser = driver
+        self.actions = ActionChains(self.browser)
+
+    def get_web_element(self, locator_type: str, locator_value: str):
         locator_type_upper = locator_type.upper()
-        web_element = browser.find_element(locator_map[locator_type_upper], locator_value)
+        web_element = self.browser.find_element(locator_map[locator_type_upper], locator_value)
 
         return web_element
 
-    @staticmethod
-    def prove_elements_present(browser: webdriver, locator_type: str, locator_value: str):
+    def get_web_elements(self, locator_type: str, locator_value: str):
         locator_type_upper = locator_type.upper()
-        web_elements = browser.find_elements(locator_map[locator_type_upper], locator_value)
+        web_elements = self.browser.find_elements(locator_map[locator_type_upper], locator_value)
 
         return web_elements
 
-    # def search_text(browser: webdriver, web_element: object, text: any):
+    def submit_text(self, web_element, text: str):
+        web_element.send_keys(text)
+        self.actions.key_down(Keys.ENTER).key_up(Keys.ENTER).perform()
+        time.sleep(30)
 
+    def click_enter_video(self, video_title: str):
+        video_locator = f"//a[@id='video-title']//*[contains(., {video_title})]"
+
+        video = self.browser.find_element(locator_map['XPATH'], video_locator)
+        is_video_visible = video.is_displayed()
+        assert is_video_visible == True
+        video.click()
