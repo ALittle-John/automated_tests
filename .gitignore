@@ -1,5 +1,6 @@
 # Packages
 robot/venv
+node_modules
 __pycache__
 
 # Reports
@@ -7,3 +8,5 @@ __pycache__
 
 # Mine
 notation.txt
+.env
+.wdm

@@ -4,10 +4,10 @@
     "editor.codeActionsOnSave": {
         "source.fixAll.eslint": "explicit"
     },
-
     // === PYTHON / ROBOT ===
     "python.defaultInterpreterPath": "${workspaceFolder}/robot/venv/bin/python",
     "robot.language-server.python": "${workspaceFolder}/robot/venv/bin/python",
+    "python.envFile": "${workspaceFolder}/.env",
     "python.analysis.extraPaths": [
         "${workspaceFolder}/robot/venv/lib/python3.12/site-packages",
         "robot/resources",
@@ -19,16 +19,16 @@
         "robot/venv/bin/python",
         "robot/venv/lib/python3.12/site-packages"
     ],
-
     "[robotframework]": {
         "editor.defaultFormatter": "robocorp.robotframework-lsp",
         "editor.formatOnSave": true
     },
-
     // === JAVASCRIPT / TYPESCRIPT / CYPRESS ===
     "javascript.suggest.completeFunctionCalls": true,
     "typescript.suggest.completeFunctionCalls": true,
-    "eslint.workingDirectories": ["cypress"],
+    "eslint.workingDirectories": [
+        "cypress"
+    ],
     "eslint.validate": [
         "javascript",
         "typescript",
