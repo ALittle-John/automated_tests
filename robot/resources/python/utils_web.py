@@ -1,7 +1,17 @@
 from selenium import webdriver
 from selenium.webdriver import Keys, ActionChains
 from selenium.webdriver.common.by import By
+from selenium.webdriver.remote.webelement import WebElement
+from selenium.webdriver.support.wait import WebDriverWait
+
+from selenium.webdriver.support import expected_conditions as EC
+from selenium.common.exceptions import *
+
+import logging
 import time
+from PIL import ImageGrab
+import os
+from pathlib import Path
 
 from selenium.webdriver.chrome.service import Service as ChromeService
 from webdriver_manager.chrome import ChromeDriverManager
@@ -9,12 +19,6 @@ from selenium.webdriver.edge.service import Service as EdgeService
 from webdriver_manager.microsoft import EdgeChromiumDriverManager
 from selenium.webdriver.firefox.service import Service as FirefoxService
 from webdriver_manager.firefox import GeckoDriverManager
-
-try:
-    from python import _setup
-    browser = _setup.browser
-except ImportError:
-    browser = None
 
 locator_map = {
     "ID": By.ID,
@@ -30,7 +34,7 @@ locator_map = {
 class SetupBrowser:
     # Possible non-use in robot resources
     def __init__(self, browser_name: str):
-        self.browser_name = browser_name.lower()
+        self.browser_name:str = browser_name.lower()
         self.browser = None
         # "Self" loads the content into the rest of the class. When used before a variable, it can be accessed by other methods within the class.
 
@@ -65,27 +69,103 @@ class WebElementInteractions:
         self.browser = driver
         self.actions = ActionChains(self.browser)
 
+    def custom_find_element(
+            self,
+            locator_type: str,
+            locator_value: str,
+            custom_alert_error_msg: Optional[str] = None,
+            custom_msg_level: Optional[str] = None,
+            time: Optional[int] = 12,
+        ):
+        locator_type_upper = locator_type.upper()
+        try:
+            element: WebElement = WebDriverWait(self.browser, time).until(
+                EC.visibility_of_element_located((locator_map[locator_type_upper], locator_value))
+            )
+            return element
+        except TimeoutException:
+            default_msg = f"Target element was not visible in {time} seconds: {locator_value}"
+            msg = custom_alert_error_msg or default_msg
+            if custom_msg_level:
+                level = custom_msg_level.lower()
+            else:
+                level = "error"
+            getattr(logging, level)(msg)
+            return None
+
+        except Exception as e:
+            default_msg = f"Other exception while waiting for element {locator_value}: {e}"
+            msg = custom_alert_error_msg or default_msg
+            if custom_msg_level:
+                level = custom_msg_level.lower()
+            else:
+                level = "error"
+            getattr(logging, level)(msg)
+            return None
+
     def get_web_element(self, locator_type: str, locator_value: str):
         locator_type_upper = locator_type.upper()
-        web_element = self.browser.find_element(locator_map[locator_type_upper], locator_value)
+        web_element:WebElement = self.browser.find_element(locator_map[locator_type_upper], locator_value)
 
         return web_element
 
     def get_web_elements(self, locator_type: str, locator_value: str):
         locator_type_upper = locator_type.upper()
-        web_elements = self.browser.find_elements(locator_map[locator_type_upper], locator_value)
+        web_elements:WebElement = self.browser.find_elements(locator_map[locator_type_upper], locator_value)
 
         return web_elements
 
-    def submit_text(self, web_element, text: str):
-        web_element.send_keys(text)
+    def submit_text(self, input_web_element, text: str):
+        input_web_element.send_keys(text)
         self.actions.key_down(Keys.ENTER).key_up(Keys.ENTER).perform()
-        time.sleep(30)
 
-    def click_enter_video(self, video_title: str):
-        video_locator = f"//a[@id='video-title']//*[contains(., {video_title})]"
+    def click_enter_video(self, video_locator: str):
+        try:
+            video:WebElement = self.browser.find_element(locator_map['XPATH'], video_locator)
+        except NoSuchElementException:
+            return logging.error(f"Unable to locate the element: {video_locator}")
 
-        video = self.browser.find_element(locator_map['XPATH'], video_locator)
-        is_video_visible = video.is_displayed()
-        assert is_video_visible == True
+        self.browser.execute_script("arguments[0].scrollIntoView(true);", video)
+        self.browser.execute_script("window.scrollBy(0, -100);")
+
         video.click()
+
+    def skip_video_if_visible(self):
+        ad_xpath: str = "//div[@class= 'ytp-ad-player-overlay-layout']"
+        skip_ad_xpath: str = "//button[contains(@class, 'ytp-skip-ad-button')]"
+
+        res = self.custom_find_element(locator_type='xpath', locator_value=ad_xpath, time=3, custom_msg_level='info')
+        if res:
+            logging.info('Ad displayed.')
+
+            res_button = self.custom_find_element(
+                locator_type='xpath',
+                locator_value=skip_ad_xpath,
+                time=16,
+                custom_alert_error_msg="The ad skip button didn't appear.",
+                custom_msg_level="info"
+                )
+            if res_button:
+                res_button.click()
+                logging.info('Ad skiped.')
+                time.sleep(3)
+
+    def stop_video_at(self, targget_time: int):
+        """
+        targget_time: seconds
+        """
+        video = self.custom_find_element(locator_type="tag_name", locator_value="video")
+        self.browser.execute_script("arguments[0].currentTime = arguments[1];", video, targget_time)
+        self.browser.execute_script("arguments[0].pause();", video)
+
+    def take_screenshot(self):
+        screenshot_dir = Path("robot/tests/python/screenshots")
+
+        if not screenshot_dir.exists():
+            os.makedirs(screenshot_dir)
+
+        screenshot_path = screenshot_dir / "yt_test.png"
+
+        screenshot = ImageGrab.grab()
+        screenshot.save(screenshot_path)
+        screenshot.close()
