@@ -1,6 +1,6 @@
-from robot.resources.python import *
-from robot.resources.python.utils_web import SetupBrowser, WebElementInteractions
-import robot.resources.python._setup as setup
+from robot.resources.python.my_py_lib_to_py_test import *
+from robot.resources.python.my_py_lib_to_py_test import SetupBrowser, WebElementInteractions
+import robot.resources.python.my_py_lib_to_py_test._setup as setup
 
 video_targget = '3-HOUR STUDY WITH ME Pomodoro 25/5 [with Rain Sounds] No Music | At Nightfall with City View'
 # video_targget = '3-HOUR STUDY WITjbufbifewbwwith Rain Sounds] No Music | At Nightfall with City View'
