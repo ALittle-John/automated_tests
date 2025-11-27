@@ -1,0 +1,55 @@
+{
+    // === GLOBAL ===
+    "editor.formatOnSave": true,
+    "editor.codeActionsOnSave": {
+        "source.fixAll.eslint": "explicit"
+    },
+    // === PYTHON / ROBOT ===
+    "python.defaultInterpreterPath": "${workspaceFolder}/robot/venv/bin/python",
+    "python.envFile": "${workspaceFolder}/.env",
+    "python.analysis.extraPaths": [
+        "${workspaceFolder}/robot/venv/lib/python3.12/site-packages",
+        "robot/resources",
+        "robot/tests"
+    ],
+    "python.terminal.activateEnvironment": true,
+    "python.terminal.executeInFileDir": false,
+    "terminal.integrated.env.linux": {
+        "PYTHONPATH": "${workspaceFolder}/robot/resources:${workspaceFolder}/robot/tests"
+    },
+    "terminal.integrated.env.osx": {
+        "PYTHONPATH": "${workspaceFolder}/robot/resources:${workspaceFolder}/robot/tests"
+    },
+    "terminal.integrated.env.windows": {
+        "PYTHONPATH": "${workspaceFolder}\\robot\\resources;${workspaceFolder}\\robot\\tests"
+    },
+    "robotcode.robot.variables": {},
+    // "robot.language-server.python": "${workspaceFolder}/robot/venv/bin/python",
+    // "robot.pythonpath": [
+    //     "robot/resources",
+    //     "robot/venv/bin/python",
+    //     "robot/venv/lib/python3.12/site-packages"
+    // ],
+    "[robotframework]": {
+        "editor.defaultFormatter": "d-biehl.robotcode",
+        "editor.formatOnSave": true
+    },
+    // === JAVASCRIPT / TYPESCRIPT / CYPRESS ===
+    "javascript.suggest.completeFunctionCalls": true,
+    "typescript.suggest.completeFunctionCalls": true,
+    "eslint.workingDirectories": [
+        "cypress"
+    ],
+    "eslint.validate": [
+        "javascript",
+        "typescript",
+        "javascriptreact",
+        "typescriptreact"
+    ],
+    "[javascript]": {
+        "editor.defaultFormatter": "dbaeumer.vscode-eslint"
+    },
+    "[typescript]": {
+        "editor.defaultFormatter": "dbaeumer.vscode-eslint"
+    }
+}
