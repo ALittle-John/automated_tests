@@ -1,3 +1,7 @@
+"""
+Just execute by comand: python -m robot.tests.python.youtube_screenshot
+"""
+
 from robot.resources.python.my_py_lib_to_py_test import *
 from robot.resources.python.my_py_lib_to_py_test import SetupBrowser, WebElementInteractions
 import robot.resources.python.my_py_lib_to_py_test._setup as setup

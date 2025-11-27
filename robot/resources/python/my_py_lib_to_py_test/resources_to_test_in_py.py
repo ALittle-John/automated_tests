@@ -1,18 +1,19 @@
+"""
+My own lib to use in test whith pure python.
+"""
+import logging
+import time
+import os
+from pathlib import Path
+from selenium.common.exceptions import *
+from PIL import ImageGrab
+
 from selenium import webdriver
 from selenium.webdriver import Keys, ActionChains
 from selenium.webdriver.common.by import By
 from selenium.webdriver.remote.webelement import WebElement
 from selenium.webdriver.support.wait import WebDriverWait
-
 from selenium.webdriver.support import expected_conditions as EC
-from selenium.common.exceptions import *
-
-import logging
-import time
-from PIL import ImageGrab
-import os
-from pathlib import Path
-
 from selenium.webdriver.chrome.service import Service as ChromeService
 from webdriver_manager.chrome import ChromeDriverManager
 from selenium.webdriver.edge.service import Service as EdgeService
