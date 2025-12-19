@@ -25,11 +25,11 @@
     },
     "robotcode.robot.variables": {},
     // "robot.language-server.python": "${workspaceFolder}/robot/venv/bin/python",
-    // "robot.pythonpath": [
-    //     "robot/resources",
-    //     "robot/venv/bin/python",
-    //     "robot/venv/lib/python3.12/site-packages"
-    // ],
+    "robotcode.robot.pythonPath": [
+        "robot/resources",
+        "robot/venv/bin/python",
+        "robot/venv/lib/python3.12/site-packages"
+    ],
     "[robotframework]": {
         "editor.defaultFormatter": "d-biehl.robotcode",
         "editor.formatOnSave": true
