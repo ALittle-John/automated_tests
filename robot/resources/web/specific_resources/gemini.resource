@@ -3,10 +3,13 @@ Library    SeleniumLibrary
 Library    OperatingSystem
 Library    ../../python/utils.py
 
+Resource    ../web_common.resource
+
 *** Variables ***
 ${response_count}    ${0}
 
 ${FILE_plus_button}    xpath=//button[contains(@class, 'upload-card-button')]
+${FILE_plus_do_login}    //div[contains(@class, 'uploader-signed-out-tooltip')]//button[contains(@class, 'sign-in-button')]
 ${FILE_response_element}    (//div[contains(@id, 'model-response-message-contentr')])[last()]
 
 *** Keywords ***
@@ -51,43 +54,35 @@ Add Local File Into Gemini
 Select Action Plus Button Gemini
     [Arguments]    ${locator_type}    ${locator}
 
-    ${pass}    Click Plus Button Or Fail
-    IF    ${pass} == True
-        Click Target Action Or Fail    ${locator_type}    ${locator}
+    ${logged}    Click Plus Button If Logged
+    IF    ${logged} == True
+        Click Target Action    ${locator_type}    ${locator}
     END
 
-    RETURN    ${pass}
+    RETURN    ${logged}
 
-Click Plus Button Or Fail
+Click Plus Button If Logged
     Click Element    ${FILE_plus_button}
 
     ${not_logged}    Run Keyword And Return Status
     ...    Wait Until Element Is Visible
-    ...    xpath=//div[contains(@class, 'uploader-signed-out-tooltip')]
+    ...    xpath=${FILE_plus_do_login}
     ...    timeout=3s
 
-    ${pass}    Set Variable    ${True}
+    ${logged}    Set Variable    ${True}
     IF    ${not_logged} == True
-        ${pass}    Set Variable    ${False}
-        Run Keyword And Continue On Failure    Fail    You must be logged in to use the Plus button.
+        ${logged}    Set Variable    ${False}
+        Log    message=You must be logged in to use the Plus button.    level=WARN
     END
 
-    RETURN    ${pass}
-
-Click Target Action Or Fail
-    [Arguments]    ${locator_type}    ${locator}
-
-    Run Keyword And Continue On Failure
-    ...    Click Element
-    ...    ${locator_type}=${locator}
-
-    Run Keyword And Return Status
-    ...    Wait Until Page Contains Element
-    ...    ${locator_type}=${locator}
-    ...    timeout=3s
+    RETURN    ${logged}
 
 Send The Message To Gemini
     Click Element    locator=//*[contains(@class, 'send-button-icon')]
+
+Not Logged, Do Log in
+    Click Target Action    locator_type=xpath    locator=${FILE_plus_do_login}
+    Do Google Log in
 
 Prove Gemini Gave Response
     ${response_container}    Set Variable    //response-container
