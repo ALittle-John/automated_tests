@@ -18,3 +18,12 @@ def select_file_by_search_file_explorer(file_name, path):
     pyautogui.write(file_name, interval=0.2)
 
     pyautogui.press("enter")
+
+def list_folders_content(path):
+    if os.path.exists(path):
+        contents = os.listdir(path)
+    else:
+        logging.error(f"Error: The directory '{path}' does not exist.")
+        contents = []
+
+    return  contents
