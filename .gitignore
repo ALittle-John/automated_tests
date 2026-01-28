@@ -5,6 +5,7 @@ __pycache__
 
 # Reports
 /results
+robot/tests/results
 
 # Mine
 notation.txt
