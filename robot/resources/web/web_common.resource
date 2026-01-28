@@ -26,43 +26,44 @@ Open Target Website
     ...
     ...    This manual confirmation is a one-time setup step and is not required again unless
     ...    the profile data is removed or invalidated.
-    [Arguments]    ${url}    ${browser}=chrome    ${headless}=no    ${use_user_data_dir}=no    ${user_data_directory}=${None}
+    [Arguments]    ${url}    ${browser}=chrome    ${headless}=${False}    ${use_user_data_dir}=${False}    ${user_data_directory}=${None}    ${custom_config}=${None}
 
-    ${browser}      Set Variable    ${browser.lower()}
-    ${is_headless}    Set Variable If    '${headless}'    ${headless.lower().strip()}    yes
-    ${logged}    Set Variable If    '${use_user_data_dir}'    ${use_user_data_dir.lower().strip()}    yes
+    ${browser}    Set Variable    ${browser.lower()}
 
-    ${path}    Set Variable    ${None}
-    IF    '${FILE_google_profile_path}' != '${EMPTY}'
-        ${path}    Set Variable    ${FILE_google_profile_path}
-    ELSE IF    '${user_data_directory}' != '${None}' and '${user_data_directory}' != '${EMPTY}'
-        ${path}    Set Variable    ${user_data_directory}
-    ELSE
-        Log    No valid user data directory was provided. Logged browser will be disabled.    level=ERROR
-        ${logged}    Set Variable    no
-    END
-
-    IF    '${logged}' == 'yes'
-        @{content}    List Folders Content    path=${path}
-        ${length}    Get Length    ${content}
-        IF    ${length} == ${0}
-            Log    message=There isn't a saved google profile content. The browser will not open with a Google account.    level=ERROR
-            ${logged}    Set Variable    no
-        END
-    END
-
-    IF    '${is_headless}' == 'yes' and '${logged}' == 'yes'
-        Open Browser    url=${url}    browser=${browser}    options=add_argument('--headless=new');add_argument('--user-data-dir=${path}');add_argument('--no-sandbox')
-    ELSE IF    '${is_headless}' != 'yes' and '${logged}' == 'yes'
-        Open Browser    url=${url}    browser=${browser}    options=add_argument('--user-data-dir=${path}');add_argument('--no-sandbox')
-    ELSE IF    '${is_headless}' != 'yes' and '${logged}' != 'yes'
-        Open Browser    url=${url}    browser=${browser}
-    END
-
+    ${browser_cfg}    Build Browser Config    headless=${headless}    use_user_data_dir=${use_user_data_dir}    user_data_directory=${user_data_directory}
+    ...    custom_config=${custom_config}
+    Open Browser    url=${url}    browser=${browser}    options=${browser_cfg}
     Maximize Browser Window
 
     Set Selenium Speed    value=0.2
     Set Screenshot Directory    path=robot/tests/results/web_results
+
+Build Browser Config
+    [Arguments]    ${headless}    ${use_user_data_dir}    ${user_data_directory}    ${custom_config}=${None}
+
+    ${browser_cfg}    Set Variable    add_argument('--no-sandbox')
+    ${global_path}    Get Variable Value    ${FILE_google_profile_path}
+
+    IF    ${use_user_data_dir} == ${True}
+        ${path}       Evaluate    $user_data_directory or $global_path
+        ${is_not_none}    Evaluate    $path not in [None, '', '${None}', '${EMPTY}']
+        IF    ${is_not_none} == ${True}
+            ${is_not_empty}    Directory Is Not Empty    path=${path}
+            IF    ${is_not_empty} == ${False}
+                Log    message=There isn't a saved google profile content. The browser will not open with a saved account.    level=ERROR
+            ELSE
+                ${browser_cfg}    Catenate    SEPARATOR=    ${browser_cfg}    ;add_argument('--user-data-dir=${path}')
+            END
+        END
+    END
+    IF    ${headless} == ${True}
+        ${browser_cfg}    Catenate    SEPARATOR=    ${browser_cfg}    ;add_argument('--headless=new')
+    END
+    IF    ${custom_config}
+        ${browser_cfg}    Catenate    SEPARATOR=    ${browser_cfg}    ;add_argument('${custom_config}')
+    END
+
+    RETURN    ${browser_cfg}
 
 Click Target Action
     [Arguments]    ${locator_type}    ${locator}

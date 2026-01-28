@@ -1,29 +1,30 @@
 from pathlib import Path
 
-import time
 import logging
-import os
+import time
+import pywinctl as pwc
 
-def select_file_by_search_file_explorer(file_name, path):
+def select_file_by_search_file_explorer(title_file_explorer:str, file_name: str, path: str):
     import pyautogui
-    base_path = Path(f"/root/{path}")
-    full_path = os.path.join(base_path, file_name)
 
-    if not os.path.isfile(full_path):
-        logging.error(f"File not found: {full_path}")
-        return None
-    logging.info(f'Starting to search file: {file_name}')
+    home = Path.home()
+    file_path = str(home / path / file_name)
 
-    pyautogui.hotkey("ctrl", "f")
-    pyautogui.write(file_name, interval=0.2)
+    window = pwc.getWindowsWithTitle(title_file_explorer)
+    win = window[0]
+    win.activate()
 
-    pyautogui.press("enter")
+    time.sleep(0.2)
 
-def list_folders_content(path):
-    if os.path.exists(path):
-        contents = os.listdir(path)
-    else:
-        logging.error(f"Error: The directory '{path}' does not exist.")
-        contents = []
+    pyautogui.hotkey('ctrl', 'l')
+    pyautogui.write(file_path, interval=0.05)
+    pyautogui.press('enter')
+    pyautogui.press('enter')
 
-    return  contents
+def directory_is_not_empty(path: str):
+    try:
+        p = Path(path)
+        return  p.exists() and any(p.iterdir())
+    except Exception as e:
+        logging.error(f'Error to access the directory {path}. {e}')
+        return False
