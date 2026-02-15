@@ -1,18 +1,18 @@
 *** Settings ***
 Library    RequestsLibrary
 
-Resource    ../../variables.resource
-
 *** Keywords ***
 Create Authenticated Session
-    [Arguments]    ${alias}
+    [Arguments]    ${alias}    ${base_url}    ${headers}={}
 
-    IF    '${alias}' == 'reqres'
-        ${base_url}    Set Variable    https://reqres.in/api
-        &{headers}    Create Dictionary
-        ...    x-api-key=reqres-free-v1
-        ...    Content-Type=application/json
-    # ELSE
-
+    IF    not ${alias}
+        Run Keyword And Continue On Failure   Fail    The request must have an alias.
+        RETURN    ${False}
     END
+    IF    not ${base_url}
+        Run Keyword And Continue On Failure    Fail    The request must have a base URL.
+        RETURN    ${False}
+    END
+
     Create Session    alias=${alias}    url=${base_url}    headers=${headers}    disable_warnings=1
+    RETURN    ${True}
