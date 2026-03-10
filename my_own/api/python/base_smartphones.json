@@ -1,0 +1,287 @@
+{
+  "apple": {
+    "iPhone_15_Pro": {
+      "company": "Apple",
+      "model": "iPhone 15 Pro",
+      "release_year": 2023,
+      "release_price_usd": 999,
+      "screen": "6.1 polegadas",
+      "processor": "A17 Pro",
+      "front_camera": "48 MP",
+      "batery_mah": 3274,
+      "memory_options": [128, 256, 512, 1024]
+    },
+    "iPhone_15": {
+      "company": "Apple",
+      "model": "iPhone 15",
+      "release_year": 2023,
+      "release_price_usd": 799,
+      "screen": "6.1 polegadas",
+      "processor": "A16 Bionic",
+      "front_camera": "48 MP",
+      "batery_mah": 3349,
+      "memory_options": [128, 256, 512]
+    },
+    "iPhone_14_Pro_Max": {
+      "company": "Apple",
+      "model": "iPhone 14 Pro Max",
+      "release_year": 2022,
+      "release_price_usd": 1099,
+      "screen": "6.7 polegadas",
+      "processor": "A16 Bionic",
+      "front_camera": "48 MP",
+      "batery_mah": 4323,
+      "memory_options": [128, 256, 512, 1024]
+    },
+    "iPhone_13": {
+      "company": "Apple",
+      "model": "iPhone 13",
+      "release_year": 2021,
+      "release_price_usd": 699,
+      "screen": "6.1 polegadas",
+      "processor": "A15 Bionic",
+      "front_camera": "12 MP",
+      "batery_mah": 3240,
+      "memory_options": [128, 256, 512]
+    },
+    "iPhone_SE_3": {
+      "company": "Apple",
+      "model": "iPhone SE (3ª geração)",
+      "release_year": 2022,
+      "release_price_usd": 429,
+      "screen": "4.7 polegadas",
+      "processor": "A15 Bionic",
+      "front_camera": "12 MP",
+      "batery_mah": 2018,
+      "memory_options": [64, 128, 256]
+    }
+  },
+  "samsung": {
+    "Galaxy_S24_Ultra": {
+      "company": "Samsung",
+      "model": "Galaxy S24 Ultra",
+      "release_year": 2024,
+      "release_price_usd": 1299,
+      "screen": "6.8 polegadas",
+      "processor": "Snapdragon 8 Gen 3",
+      "front_camera": "200 MP",
+      "batery_mah": 5000,
+      "memory_options": [256, 512, 1024]
+    },
+    "Galaxy_S24_Plus": {
+      "company": "Samsung",
+      "model": "Galaxy S24+",
+      "release_year": 2024,
+      "release_price_usd": 999,
+      "screen": "6.7 polegadas",
+      "processor": "Snapdragon 8 Gen 3",
+      "front_camera": "50 MP",
+      "batery_mah": 4900,
+      "memory_options": [256, 512]
+    },
+    "Galaxy_S23_FE": {
+      "company": "Samsung",
+      "model": "Galaxy S23 FE",
+      "release_year": 2023,
+      "release_price_usd": 599,
+      "screen": "6.4 polegadas",
+      "processor": "Exynos 2200",
+      "front_camera": "50 MP",
+      "batery_mah": 4500,
+      "memory_options": [128, 256]
+    },
+    "Galaxy_Z_Fold_5": {
+      "company": "Samsung",
+      "model": "Galaxy Z Fold 5",
+      "release_year": 2023,
+      "release_price_usd": 1799,
+      "screen": "7.6 polegadas (desdobrado)",
+      "processor": "Snapdragon 8 Gen 2",
+      "front_camera": "50 MP",
+      "batery_mah": 4400,
+      "memory_options": [256, 512, 1024]
+    },
+    "Galaxy_A54": {
+      "company": "Samsung",
+      "model": "Galaxy A54 5G",
+      "release_year": 2023,
+      "release_price_usd": 449,
+      "screen": "6.4 polegadas",
+      "processor": "Exynos 1380",
+      "front_camera": "50 MP",
+      "batery_mah": 5000,
+      "memory_options": [128, 256]
+    }
+  },
+  "google": {
+    "Pixel_8_Pro": {
+      "company": "Google",
+      "model": "Pixel 8 Pro",
+      "release_year": 2023,
+      "release_price_usd": 999,
+      "screen": "6.7 polegadas",
+      "processor": "Google Tensor G3",
+      "front_camera": "50 MP",
+      "batery_mah": 5050,
+      "memory_options": [128, 256, 512]
+    },
+    "Pixel_8": {
+      "company": "Google",
+      "model": "Pixel 8",
+      "release_year": 2023,
+      "release_price_usd": 699,
+      "screen": "6.2 polegadas",
+      "processor": "Google Tensor G3",
+      "front_camera": "50 MP",
+      "batery_mah": 4575,
+      "memory_options": [128, 256]
+    },
+    "Pixel_7a": {
+      "company": "Google",
+      "model": "Pixel 7a",
+      "release_year": 2023,
+      "release_price_usd": 499,
+      "screen": "6.1 polegadas",
+      "processor": "Google Tensor G2",
+      "front_camera": "64 MP",
+      "batery_mah": 4385,
+      "memory_options": [128]
+    },
+    "Pixel_7_Pro": {
+      "company": "Google",
+      "model": "Pixel 7 Pro",
+      "release_year": 2022,
+      "release_price_usd": 899,
+      "screen": "6.7 polegadas",
+      "processor": "Google Tensor G2",
+      "front_camera": "50 MP",
+      "batery_mah": 5000,
+      "memory_options": [128, 256, 512]
+    },
+    "Pixel_Fold": {
+      "company": "Google",
+      "model": "Pixel Fold",
+      "release_year": 2023,
+      "release_price_usd": 1799,
+      "screen": "7.6 polegadas (desdobrado)",
+      "processor": "Google Tensor G2",
+      "front_camera": "48 MP",
+      "batery_mah": 4821,
+      "memory_options": [256, 512]
+    }
+  },
+  "xiaomi": {
+    "Xiaomi_14_Ultra": {
+      "company": "Xiaomi",
+      "model": "Xiaomi 14 Ultra",
+      "release_year": 2024,
+      "release_price_usd": 1099,
+      "screen": "6.73 polegadas",
+      "processor": "Snapdragon 8 Gen 3",
+      "front_camera": "50 MP (Leica)",
+      "batery_mah": 5300,
+      "memory_options": [256, 512, 1024]
+    },
+    "Xiaomi_14": {
+      "company": "Xiaomi",
+      "model": "Xiaomi 14",
+      "release_year": 2024,
+      "release_price_usd": 799,
+      "screen": "6.36 polegadas",
+      "processor": "Snapdragon 8 Gen 3",
+      "front_camera": "50 MP (Leica)",
+      "batery_mah": 4610,
+      "memory_options": [256, 512]
+    },
+    "Xiaomi_13T_Pro": {
+      "company": "Xiaomi",
+      "model": "Xiaomi 13T Pro",
+      "release_year": 2023,
+      "release_price_usd": 649,
+      "screen": "6.67 polegadas",
+      "processor": "MediaTek Dimensity 9200+",
+      "front_camera": "50 MP",
+      "batery_mah": 5000,
+      "memory_options": [256, 512]
+    },
+    "Redmi_Note_13_Pro": {
+      "company": "Xiaomi",
+      "model": "Redmi Note 13 Pro",
+      "release_year": 2023,
+      "release_price_usd": 329,
+      "screen": "6.67 polegadas",
+      "processor": "Snapdragon 7s Gen 2",
+      "front_camera": "200 MP",
+      "batery_mah": 5100,
+      "memory_options": [128, 256]
+    },
+    "Poco_F5_Pro": {
+      "company": "Xiaomi",
+      "model": "Poco F5 Pro",
+      "release_year": 2023,
+      "release_price_usd": 449,
+      "screen": "6.67 polegadas",
+      "processor": "Snapdragon 8+ Gen 1",
+      "front_camera": "64 MP",
+      "batery_mah": 5160,
+      "memory_options": [256, 512]
+    }
+  },
+  "oneplus": {
+    "OnePlus_12": {
+      "company": "OnePlus",
+      "model": "OnePlus 12",
+      "release_year": 2024,
+      "release_price_usd": 799,
+      "screen": "6.82 polegadas",
+      "processor": "Snapdragon 8 Gen 3",
+      "front_camera": "50 MP",
+      "batery_mah": 5400,
+      "memory_options": [256, 512]
+    },
+    "OnePlus_12R": {
+      "company": "OnePlus",
+      "model": "OnePlus 12R",
+      "release_year": 2024,
+      "release_price_usd": 499,
+      "screen": "6.78 polegadas",
+      "processor": "Snapdragon 8 Gen 2",
+      "front_camera": "50 MP",
+      "batery_mah": 5500,
+      "memory_options": [128, 256]
+    },
+    "OnePlus_11": {
+      "company": "OnePlus",
+      "model": "OnePlus 11",
+      "release_year": 2023,
+      "release_price_usd": 699,
+      "screen": "6.7 polegadas",
+      "processor": "Snapdragon 8 Gen 2",
+      "front_camera": "50 MP",
+      "batery_mah": 5000,
+      "memory_options": [128, 256]
+    },
+    "OnePlus_Open": {
+      "company": "OnePlus",
+      "model": "OnePlus Open",
+      "release_year": 2023,
+      "release_price_usd": 1699,
+      "screen": "7.82 polegadas (desdobrado)",
+      "processor": "Snapdragon 8 Gen 2",
+      "front_camera": "48 MP",
+      "batery_mah": 4805,
+      "memory_options": [512]
+    },
+    "OnePlus_Nord_3": {
+      "company": "OnePlus",
+      "model": "OnePlus Nord 3",
+      "release_year": 2023,
+      "release_price_usd": 399,
+      "screen": "6.74 polegadas",
+      "processor": "MediaTek Dimensity 9000",
+      "front_camera": "50 MP",
+      "batery_mah": 5000,
+      "memory_options": [128, 256]
+    }
+  }
+}

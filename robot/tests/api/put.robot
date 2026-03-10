@@ -1,17 +1,27 @@
 *** Settings ***
+Library    ../../../my_own/api/python/routs.py
+
 Resource    ../../resources/api/common_api.resource
 
+Suite Setup    Start Local Fast Api
+Suite Teardown    Shutdown Local Fast Api
+
 *** Test Cases ***
-POST Reqres Fake API
-    Set Test Variable    ${ALIAS}    reqres
+Add New Device
+    # ${brand}    Set Variable    lg
+    # ${company}    Set Variable    LG
+    # ${device_name}    Set Variable    MotorolaG86
+    @{memory_options}    Create List    128    256
 
-    &{user_to_update}    Create Dictionary
-    ...    name = morpheus
-    ...    job = QA Engineer
-    Reqres API    method=PUT    final_url=/users/2    data=${user_to_update}
+    &{device_data}    Create Dictionary
+    ...    company=LG
+    ...    model=G86
+    ...    release_year=2021
+    ...    release_price_usd=488.46
+    ...    screen=pOLED HDR10+ com Gorilla Glass 7i
+    ...    processor=Dimensity 7300 Octa core de 2,5GHz
+    ...    front_camera=48MP
+    ...    batery_mah=5200
+    ...    memory_options=${memory_options}
 
-# POST Json Placeholder Fake API
-
-
-# POST Swapi Fake API
-
+    ${response_body}    Custom REST Request    alias=device_api    base_url=http://127.0.0.1:8000    method=PUT    final_url=/smartphones/devices/new?brand=lg&device_name=MotorolaG86    data=${device_data}
