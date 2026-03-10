@@ -26,9 +26,9 @@ Custom REST Request
     END
 
     IF    ${response.status_code} >= 400
-        Run Keyword And Continue On Failure    Fail    msg="${final_url}" returned text: ${response.text} ${\n}
+        Run Keyword And Continue On Failure    Fail    msg="${final_url}" - Status code: ${response.status_code} - response text: ${response.text} ${\n}
     ELSE
-        Log    message=Status code: ${response.status_code} | Response text: ${response.text} ${\n}    console=True
+        Log    message=${final_url}" - Status code: ${response.status_code} - Response text: ${response.text} ${\n} ${\n}    console=True
     END
 
     RETURN    ${response.text}
