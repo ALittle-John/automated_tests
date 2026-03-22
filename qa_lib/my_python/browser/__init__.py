@@ -1,4 +1,4 @@
-from .resources_to_test_in_py import *
+from .browser_automation import *
 
 # open_browser = SetupBrowser.open_browser
 # shut_down_browser = SetupBrowser.shut_down_browser

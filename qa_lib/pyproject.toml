@@ -1,0 +1,8 @@
+[project]
+name = "qa-lib"
+version = "0.1.0"
+description = "QA automation shared custom python library"
+dependencies = []
+
+[tool.setuptools.packages.find]
+where = ["."]

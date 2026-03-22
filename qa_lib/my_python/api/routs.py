@@ -6,10 +6,10 @@ import logging, json, subprocess, fastapi, time
 
 # Remember: These are local API. To start, run `uvicorn routs:app --reload`.
 
-BASE_DIR = Path(__file__).resolve().parent
-with open(BASE_DIR / "base_smartphones.json", "r", encoding="utf-8") as bsmt:
+BASE_DIR = Path(__file__).resolve().parents[3]
+with open(BASE_DIR / "data" / "products" / "base_smartphones.json", "r", encoding="utf-8") as bsmt:
     bf_smartphones: Dict = json.load(bsmt)
-with open(BASE_DIR / "open_smartphones.json", "r", encoding="utf-8") as osmt:
+with open(BASE_DIR / "data" / "products" / "open_smartphones.json", "r", encoding="utf-8") as osmt:
     op_smartphones: Dict = json.load(osmt)
 
 def start_local_fast_api():
