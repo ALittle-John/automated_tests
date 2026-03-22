@@ -1,7 +1,7 @@
 *** Settings ***
 Library    SeleniumLibrary
 Library    OperatingSystem
-Library    ../../python/utils.py
+Library    ../../qa_lib/my_python/utils/utils.py
 
 Resource    ../web_common.resource
 

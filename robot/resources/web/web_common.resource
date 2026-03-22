@@ -1,7 +1,7 @@
 *** Settings ***
 Library    SeleniumLibrary
-Library    ../../load_env.py
-Library    ../../resources/python/utils.py
+Library    ../../../qa_lib/my_python/load_env.py
+Library    ../../../qa_lib/my_python/utils/utils.py
 
 *** Variables ***
 ${FILE_user}    %{env_google_user}

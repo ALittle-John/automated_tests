@@ -1,5 +1,5 @@
 *** Settings ***
-Library    ../../../my_own/api/python/routs.py
+Library    ../../../qa_lib/my_python/api/routs.py
 
 Resource    ../../resources/api/common_api.resource
 

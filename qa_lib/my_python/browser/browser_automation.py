@@ -1,10 +1,9 @@
 """
 My own lib to use in test whith pure python.
 """
-import logging
-import time
-import os
+import logging, time, os
 from pathlib import Path
+from typing import Optional
 from selenium.common.exceptions import *
 from PIL import ImageGrab
 
@@ -131,7 +130,7 @@ class WebElementInteractions:
 
         video.click()
 
-    def skip_video_if_visible(self):
+    def skip_video_ad_if_visible(self):
         ad_xpath: str = "//div[@class= 'ytp-ad-player-overlay-layout']"
         skip_ad_xpath: str = "//button[contains(@class, 'ytp-skip-ad-button')]"
 
@@ -160,7 +159,7 @@ class WebElementInteractions:
         self.browser.execute_script("arguments[0].pause();", video)
 
     def take_screenshot(self):
-        screenshot_dir = Path("robot/tests/python/screenshots")
+        screenshot_dir = Path("data/tests_screenshots")
 
         if not screenshot_dir.exists():
             os.makedirs(screenshot_dir)

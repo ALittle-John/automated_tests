@@ -1,0 +1,13 @@
+pyproject.toml
+my_python/__init__.py
+my_python/api/__init__.py
+my_python/api/routs.py
+my_python/browser/__init__.py
+my_python/browser/browser_automation.py
+my_python/utils/utils.py
+my_python/utils/utils_mobile.py
+my_python/utils/utils_web.py
+qa_lib.egg-info/PKG-INFO
+qa_lib.egg-info/SOURCES.txt
+qa_lib.egg-info/dependency_links.txt
+qa_lib.egg-info/top_level.txt

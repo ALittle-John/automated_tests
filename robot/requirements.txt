@@ -1,6 +1,0 @@
-requests==2.32.5
-robotframework==7.3.2
-robotframework-requests==0.9.7
-selenium==4.37.0
-webdriver-manager==4.0.2
-locust==2.39.1
