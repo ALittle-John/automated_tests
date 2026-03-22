@@ -1,6 +1,6 @@
 *** Settings ***
-Resource    web/web_common.resource
-Resource    web/specific_resources/gemini.resource
+Resource    ../../../resources/web/web_common.resource
+Resource    ../../../resources/web/specific_resources/gemini.resource
 
 # *** Variables ***
 # ${TEST_response_gemini_number}    ${0}

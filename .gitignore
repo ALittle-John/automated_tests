@@ -1,11 +1,12 @@
 # Packages
-robot/venv
+.venv
 node_modules
 __pycache__
 
-# Reports
+# Reports / Results
 /results
 robot/tests/results
+data/tests_screenshots
 
 # Mine
 notation.txt

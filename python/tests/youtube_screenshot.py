@@ -1,13 +1,9 @@
 """
-Just execute by comand: python -m robot.tests.python.youtube_screenshot
+Just execute by comand: `python python/tests/youtube_screenshot.py` or `python -m python.tests.youtube_screenshot`
 """
-
-from robot.resources.python.my_py_lib_to_py_test import *
-from robot.resources.python.my_py_lib_to_py_test import SetupBrowser, WebElementInteractions
-import robot.resources.python.my_py_lib_to_py_test._setup as setup
+from my_python.browser import SetupBrowser, WebElementInteractions
 
 video_targget = '3-HOUR STUDY WITH ME Pomodoro 25/5 [with Rain Sounds] No Music | At Nightfall with City View'
-# video_targget = '3-HOUR STUDY WITjbufbifewbwwith Rain Sounds] No Music | At Nightfall with City View'
 video_locator = f"//a[@id='video-title']//*[contains(., '{video_targget}')]"
 
 browser_manager = SetupBrowser(browser_name='Chrome')
@@ -22,6 +18,6 @@ actions.submit_text(input_web_element=search_yt_input, text=video_targget)
 actions.custom_find_element(locator_type='xpath', locator_value=video_locator)
 actions.click_enter_video(video_locator=video_locator)
 actions.custom_find_element(locator_type='tag_name', locator_value='video')
-actions.skip_video_if_visible()
+actions.skip_video_ad_if_visible()
 actions.stop_video_at(targget_time=280)
 actions.take_screenshot()
