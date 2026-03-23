@@ -1,7 +1,15 @@
 # automated_tests
 
-This repository is used not just for studies, but also as a support for others' QA.
-Here, there are many types of tests using different languages, and whenever I can, I update some tests.
+## Project Purpose
+
+This project was created for educational purposes to demonstrate test automation practices across multiple technologies.
+You are welcome to explore, study, and use this code as a reference for learning.
+However, this project should not be modified or redistributed as a derived work. The goal is to preserve the original structure and intent of the project.
+
+## 🚫 Contributions
+
+This is a personal learning project.
+External contributions are not accepted in order to maintain consistency and authorship.
 
 ## API Test
 
